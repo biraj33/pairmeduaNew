@@ -1,0 +1,85 @@
+<%- include('admin_header') %> 
+<div class="area">
+
+<% if(page == "home"){ %>
+    <h1>Welcome to admin pannel</h1>
+    <h2>please slected respected portinon from side pannel</h2>
+
+<%}else if (page == "message"){%>
+    <table>
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>subject</th>
+            <th>message</th>
+            <th>delete data</th>
+        </tr>
+        </thead>
+        <tbody>
+    <% message.forEach(function(result){ %>
+        
+        <tr>
+        <td><%= result.name %></td>
+        <td><%= result.email %></td>
+        <td><%= result.subject %></td>
+        <td><%= result.message %></td>
+        <td>
+            <form action="/deleteMessage" method="post">
+                <div class="item">
+                  <input name="checkbox" value="<%=result._id%>"  type="checkbox" onchange="this.form.submit()">
+                </div>
+                </form>
+        </td>
+
+        </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<%}else if (page == "video"){%>
+    <h1>video</h1>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>link</th>
+            <th>delete video</th>
+
+        </tr>
+        </thead>
+        <tbody>
+    <% video.forEach(function(result){ %>
+        
+        <tr>
+        <td><%= result.title %></td>
+        <td><%= result.link %></td>
+        <td>
+            <form action="/deleteVideo" method="post">
+                <div class="item">
+                  <input name="checkbox" value="<%=result._id%>"  type="checkbox" onchange="this.form.submit()">
+                </div>
+                </form>
+        </td>
+
+        </tr>
+        <% }) %>   
+    
+    <tr>
+    <form action="/videoPost" method="post">
+
+        <div class="videoInput">
+            <td><input type="text" name="title" placeholder="title"></td>
+            <td><input type="text" name="link"  placeholder="link"></td>
+            <td><button type="submit"> + </button></td>
+        </div>
+    </form>
+    </tr>
+    </tbody>
+    </table>
+    <%}%>
+</div>
+
+
+<%- include('admin_navbar') %>
+<%- include('admin_footer') %> 
